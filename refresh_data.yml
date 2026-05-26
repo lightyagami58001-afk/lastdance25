@@ -1,0 +1,26 @@
+name: Weekly Data Refresh
+on:
+  schedule:
+    - cron: '0 2 * * 0'  # Sunday 2AM
+  workflow_dispatch:
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Run data fetcher
+        run: |
+          pip install requests
+          python scripts/fetch_pagasa.py
+          python scripts/fetch_hazards.py
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add assets/data/
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-refresh data"
+          git push
