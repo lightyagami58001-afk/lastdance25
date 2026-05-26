@@ -1,0 +1,30 @@
+name: kanlungan_ph
+description: Offline wilderness survival app
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  tflite_flutter: ^0.10.4
+  geolocator: ^9.0.2
+  workmanager: ^0.5.1
+  sms_sender: ^0.1.0
+  sqflite: ^2.3.0
+  mapbox_gl: ^0.16.0
+  path_provider: ^2.1.1
+  permission_handler: ^11.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/
+    - assets/ml/
+    - assets/maps/
